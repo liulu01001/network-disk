@@ -1,9 +1,7 @@
 package com.liulu.networkDisk.mapper;
 
 import com.liulu.networkDisk.model.User;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

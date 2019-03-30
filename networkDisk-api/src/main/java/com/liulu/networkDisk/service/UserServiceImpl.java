@@ -1,17 +1,11 @@
 package com.liulu.networkDisk.service;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.liulu.networkDisk.mapper.UserMapper;
 import com.liulu.networkDisk.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl {
@@ -19,25 +13,19 @@ public class UserServiceImpl {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
-    @Autowired
-    RedisTemplate redisTemplate;
+    public User selectuUserById(Integer id) {
+        int i=1/0;
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
+    }
 
-    /**
-     * 查询所有
-     *
-     * @return
-     */
-    public PageInfo<User> findAllUserList(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        User user = userMapper.selectByPrimaryKey(9);
-        List list = new ArrayList();
-        list.add(user);
-        PageInfo<User> pageInfo = new PageInfo<>(list);
-        // 具体使用
-        redisTemplate.opsForList().leftPush("user:list", JSON.toJSONString(list));
-        stringRedisTemplate.opsForValue().set("user:name", "张三");
-        return pageInfo;
+    public Boolean  insertUser(User user){
+        if(user.getName()!=null){
+            user.setPwd("111");
+            user.setTime(new Date());
+             userMapper.insert(user);
+             return true;
+        }
+       return false;
     }
 }
