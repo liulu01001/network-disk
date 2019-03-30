@@ -17,6 +17,7 @@ public class GlobalExceptionHandler {
         Map<String ,Object> map = new HashMap<>();
         map.put("success",false);
         map.put("errMessage","查询失败");
+        e.printStackTrace();
         return map;
 
     }
