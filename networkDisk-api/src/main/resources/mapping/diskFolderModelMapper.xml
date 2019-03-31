@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liulu.networkDisk.mapper.DiskFolderModelMapper" >
+  <resultMap id="BaseResultMap" type="com.liulu.networkDisk.model.DiskFolderModel" >
+    <id column="user_dir_id" property="userDirId" jdbcType="VARCHAR" />
+    <result column="dir_name" property="dirName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="son_id" property="sonId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="file_number" property="fileNumber" jdbcType="INTEGER" />
+    <result column="dir_size" property="dirSize" jdbcType="INTEGER" />
+    <result column="delete_time" property="deleteTime" jdbcType="DATE" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_dir_id, dir_name, parent_id, son_id, create_time, update_time, file_number, 
+    dir_size, delete_time, is_delete, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from disk_folder
+    where user_dir_id = #{userDirId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from disk_folder
+    where user_dir_id = #{userDirId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.liulu.networkDisk.model.DiskFolderModel" >
+    insert into disk_folder (user_dir_id, dir_name, parent_id, 
+      son_id, create_time, update_time, 
+      file_number, dir_size, delete_time, 
+      is_delete, user_id)
+    values (#{userDirId,jdbcType=VARCHAR}, #{dirName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{sonId,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{fileNumber,jdbcType=INTEGER}, #{dirSize,jdbcType=INTEGER}, #{deleteTime,jdbcType=DATE}, 
+      #{isDelete,jdbcType=CHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liulu.networkDisk.model.DiskFolderModel" >
+    insert into disk_folder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userDirId != null" >
+        user_dir_id,
+      </if>
+      <if test="dirName != null" >
+        dir_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="sonId != null" >
+        son_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="fileNumber != null" >
+        file_number,
+      </if>
+      <if test="dirSize != null" >
+        dir_size,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userDirId != null" >
+        #{userDirId,jdbcType=VARCHAR},
+      </if>
+      <if test="dirName != null" >
+        #{dirName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sonId != null" >
+        #{sonId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="fileNumber != null" >
+        #{fileNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dirSize != null" >
+        #{dirSize,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liulu.networkDisk.model.DiskFolderModel" >
+    update disk_folder
+    <set >
+      <if test="dirName != null" >
+        dir_name = #{dirName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="sonId != null" >
+        son_id = #{sonId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="fileNumber != null" >
+        file_number = #{fileNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dirSize != null" >
+        dir_size = #{dirSize,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_dir_id = #{userDirId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liulu.networkDisk.model.DiskFolderModel" >
+    update disk_folder
+    set dir_name = #{dirName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      son_id = #{sonId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      file_number = #{fileNumber,jdbcType=INTEGER},
+      dir_size = #{dirSize,jdbcType=INTEGER},
+      delete_time = #{deleteTime,jdbcType=DATE},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where user_dir_id = #{userDirId,jdbcType=VARCHAR}
+  </update>
+</mapper>
